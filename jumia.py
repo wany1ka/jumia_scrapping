@@ -38,7 +38,7 @@ def scrape_jumia_products(url):
             total_reviews = int(product.find('span', class_='total_reviews').text.strip())
         except (AttributeError, ValueError):
             total_reviews = 0
-        popularity = "High" if total_reviews >= 100 else "Low"
+        popularity = "High" if total_reviews >= 200 else "Low"
         product_data = {
             'Product Name': product_name,
             'Brand Name': brand_name,
@@ -56,10 +56,7 @@ def scrape_jumia_products(url):
         csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         csv_writer.writeheader()
         csv_writer.writerows(data)
-    print(f"Jumia products data saved to '{csv_file_path}'")
+    print(f"Data saved to '{csv_file_path}'")
 if __name__ == "__main__":
     jumia_url = 'https://www.jumia.co.ke/'
     scrape_jumia_products(jumia_url)
-
-
-
